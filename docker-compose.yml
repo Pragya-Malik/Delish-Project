@@ -1,18 +1,31 @@
-# Docker compose file for Delish-Project
-
 services:
   frontend:
-    container_name: Delish-Project
-    image: delish-app
-    volumes: 
-      - .:/usr/share/nginx/html
+    container_name: delish-frontend
+    build: ./frontend
     ports:
-      - 8080:80
-    healthcheck:
-      test: [ "CMD", "wget", "-qO-", "http://localhost"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+      - "8080:80"
     restart: unless-stopped
 
-  
+  backend:
+    container_name: delish-backend
+    build: ./backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  db:
+    container_name: delish-db
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: restaurant
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:

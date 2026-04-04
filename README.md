@@ -1,82 +1,154 @@
+# 🍽️ Delish — Containerized Restaurant Application
 
-# DELISH PROJECT
+## 📌 Overview
 
-## 📌 Description:
-The Delish project is a creative front-end design project focused on building an aesthetically pleasing and structured website layout. This project emphasizes design consistency, typography, color usage, and overall visual presentation.
+Delish is a **containerized restaurant web application** designed to demonstrate **real-world DevOps practices**.
 
----
-
-## ✨ Key Highlights:
-- Creative UI design
-- Clean typography and color scheme
-- Responsive layout
-- Modern visual structure
+The project starts as a frontend application and evolves into a **multi-service system** including backend APIs, database integration, CI/CD pipelines, and Kubernetes deployment.
 
 ---
 
-## Technologies Used:
-HTML, CSS, JavaScript
+## 🎯 Project Objective
+
+This project is built to showcase:
+
+- Containerization using Docker
+- Multi-service architecture using Docker Compose
+- CI/CD automation (upcoming)
+- Kubernetes-based deployment (upcoming)
+
+> This is not just a UI project — it is a **DevOps-focused system design project**.
 
 ---
 
-## 🐳 Containerization (Docker):
+## 🏗️ Current Architecture
 
-This project is containerized using **Docker** to ensure consistent runtime across environments.
-
-- Uses **nginx:alpine** as a lightweight web server
-- Dockerfile copies static frontend files into the nginx HTML directory
-- Enables portable and reproducible deployment
+Frontend (Static Website)
+⬇
+Nginx Web Server (Docker Container)
 
 ---
 
-## Docker Compose:
+## 🧰 Tech Stack
 
-Docker Compose is used to automate container lifecycle management.
+- Frontend: HTML, CSS, JavaScript
+- Web Server: Nginx
+- Containerization: Docker
+- Orchestration (Local): Docker Compose
+
+---
+
+## 🐳 Containerization Details
+
+The application is containerized using Docker to ensure:
+
+- Environment consistency
+- Portability across systems
+- Simplified deployment
+
+### Key Points:
+
+- Uses lightweight **nginx:alpine** image
+- Static files served via Nginx
+- Custom Dockerfile for build
+
+---
+
+## ⚙️ Docker Compose Setup
+
+Docker Compose is used to manage the application lifecycle.
 
 It handles:
-- Container creation
+
+- Container orchestration
 - Port mapping
-- Restart policy
-- Healthcheck monitoring
+- Restart policies
+- Health checks
 
-This allows the application to be started with a single command.
-
----
-
-## How to Run (Docker):
-
- 1. Clone the repository:
-- git clone https://github.com/Pragya-Malik/Delish-Project.git
-- cd Delish-Project
-  
- 2. Run with Docker Compose:
-- docker compose up -d
-  
- 3. Open in browser:
-- http://localhost:8080
+Run the entire application with a single command.
 
 ---
 
-## PROJECT STRUCTURE:
-Delish-Project
-│── index.html
-│── style.css
-│── main.js
+## 🚀 How to Run Locally
+
+### 1. Clone the repository
+
+```
+git clone https://github.com/Pragya-Malik/Delish-Project.git
+cd Delish-Project
+```
+
+### 2. Start the application
+
+```
+docker compose up --build
+```
+
+### 3. Access the app
+
+```
+http://localhost:8080
+```
+
+---
+
+## 📁 Project Structure
+
+```
+Delish-Project/
+│── frontend/
+│   ├── index.html
+│   ├── style.css
+│   └── main.js
+│
 │── Dockerfile
 │── docker-compose.yml
 │── README.md
+```
 
 ---
 
+## 🔄 Upcoming Enhancements (Roadmap)
+
+This project is actively being expanded into a full DevOps pipeline:
+
+- [ ] Backend API (Node.js + Express)
+- [ ] Database integration (PostgreSQL)
+- [ ] Multi-container architecture
+- [ ] CI/CD pipeline using GitHub Actions
+- [ ] Docker image push to registry
+- [ ] Kubernetes deployment (Minikube / K8s cluster)
+- [ ] ConfigMaps & Secrets management
 
 ---
 
-## 🚀 Purpose
+## 📊 Future Architecture (Target)
 
-*The goal of this project is not only frontend development but also learning real-world DevOps practices such as containerization, environment consistency, and automated deployment workflows.*
+User → Frontend → Backend API → Database
+        ⬇
+      Docker Containers
+        ⬇
+      CI/CD Pipeline
+        ⬇
+     Kubernetes Cluster
 
+---
 
+## 💡 Key Learning Outcomes
 
-## ▶️ How to Run (Docker)
+- Understanding container-based deployments
+- Managing multi-service applications
+- Building CI/CD pipelines
+- Deploying applications on Kubernetes
 
-### 1. Clone the repository
+---
+
+## 📌 Important Note
+
+This project is intentionally designed to grow from a simple frontend application into a **production-style DevOps project**.
+
+---
+
+## 👩‍💻 Author
+
+Pragya Malik
