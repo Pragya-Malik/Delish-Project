@@ -15,13 +15,13 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Scan frontend image
-        uses: aquasecurity/trivy-action@0.20.0
+        uses: aquasecurity/trivy-action@master
         with:
           image-ref: ${{ secrets.DOCKER_USERNAME }}/delish-project-frontend:latest
           severity: "CRITICAL"
 
       - name: Scan backend image
-        uses: aquasecurity/trivy-action@v0.20.0
+        uses: aquasecurity/trivy-action@master
         with:
           image-ref: ${{ secrets.DOCKER_USERNAME }}/delish-project-backend:latest
           severity: "CRITICAL"
