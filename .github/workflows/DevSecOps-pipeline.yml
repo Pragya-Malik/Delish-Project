@@ -23,3 +23,4 @@ jobs:
   image-scan:
     needs: [build-and-push]
     uses: ./.github/workflows/image-scan.yml
+    secrets: inherit
