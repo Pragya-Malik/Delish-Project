@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Scan frontend base image
-        run: docker run --rm aquasec/trivy image nginx:alpine
+      - name: Scan frontend image
+        run: docker run --rm aquasec/trivy:0.50.1 image ${{ secrets.DOCKER_USERNAME }}/delish-frontend
 
-      - name: Scan backend base image
-        run: docker run --rm aquasec/trivy image node:18
+      - name: Scan backend image
+        run: docker run --rm aquasec/trivy:0.50.1 image ${{ secrets.DOCKER_USERNAME }}/delish-backend
