@@ -3,23 +3,23 @@ on:
   workflow_dispatch:
 jobs:
   code-quality:
-    uses: ./.github/workflows/Code-Quality.yml
+    uses: ./.github/workflows/code-quality.yml
 
   secret-scan:
-    uses: ./.github/workflows/Secret-Scan.yml
+    uses: ./.github/workflows/secret-scan.yml
 
   dependency-scan:
-    uses: ./.github/workflows/Dependency-Scan.yml
+    uses: ./.github/workflows/dependency-scan.yml
 
   docker-linting:
     needs: [code-quality, secret-scan, dependency-scan]
-    uses: ./.github/workflows/Docker-Linting.yml
+    uses: ./.github/workflows/docker-linting.yml
 
   build-and-push:
     needs: [docker-linting]
-    uses: ./.github/workflows/Build-and-Push.yml
+    uses: ./.github/workflows/build-and-push.yml
     secrets: inherit
 
   image-scan:
     needs: [build-and-push]
-    uses: ./.github/workflows/Image-Scanning.yml
+    uses: ./.github/workflows/image-scan.yml
