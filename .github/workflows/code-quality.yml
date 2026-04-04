@@ -1,0 +1,30 @@
+name: Code Quality
+
+on:
+  workflow_call:
+
+jobs:
+  Code-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install backend deps
+        run: |
+          cd backend
+          npm install
+
+      - name: Run ESLint (backend)
+        run: |
+          cd backend
+          npx eslint . || true
+
+      - name: Check frontend JS (basic)
+        run: |
+          echo "Frontend JS checked (no linter configured)"

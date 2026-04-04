@@ -1,0 +1,15 @@
+name: Container Scan
+
+on:
+  workflow_call:
+
+jobs:
+  Image-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Scan frontend base image
+        run: docker run --rm aquasec/trivy image nginx:alpine
+
+      - name: Scan backend base image
+        run: docker run --rm aquasec/trivy image node:18
