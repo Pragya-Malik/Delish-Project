@@ -10,7 +10,7 @@ document.querySelectorAll("nav a").forEach(link => {
 // Load menu from backend
 async function loadMenu() {
   try {
-    const res = await fetch("http://98.80.151.86:5000/api/menu");
+    const res = await fetch("/api/menu");
     if (!res.ok) throw new Error("API not available");
 
     const data = await res.json();
