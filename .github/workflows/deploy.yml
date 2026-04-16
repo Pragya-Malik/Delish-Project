@@ -17,11 +17,29 @@ jobs:
             docker pull ${{ secrets.DOCKER_USERNAME }}/delish-project-backend:latest
             docker pull ${{ secrets.DOCKER_USERNAME }}/delish-project-frontend:latest
 
+            docker stop nginx || true
             docker stop backend || true
             docker stop frontend || true
 
+            docker rm nginx || true
             docker rm backend || true
             docker rm frontend || true
 
-            docker run -d --name backend --network delish-net -p 5000:5000 ${{ secrets.DOCKER_USERNAME }}/delish-project-backend:latest
-            docker run -d --name frontend -p 80:80 ${{ secrets.DOCKER_USERNAME }}/delish-project-frontend:latest
+            docker run -d \
+            --name backend \
+            --network delish-net \
+            ${{ secrets.DOCKER_USERNAME }}/delish-project-backend:latest
+
+            docker run -d \
+            --name frontend \
+            --network delish-net \
+            ${{ secrets.DOCKER_USERNAME }}/delish-project-frontend:latest
+
+            docker run -d \
+            --name nginx \
+            --network delish-net \
+            -p 80:80 \
+            -p 443:443 \
+            -v /home/ubuntu/Delish-Project/nginx.conf:/etc/nginx/nginx.conf:ro \
+            -v /home/ubuntu/Delish-Project/ssl:/etc/nginx/ssl:ro \
+            nginx:alpine
