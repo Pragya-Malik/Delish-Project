@@ -1,154 +1,188 @@
-# 🍽️ Delish — Containerized Restaurant Application
+# 🍽️ Delish — DevSecOps Pipeline with Dockerized Full-Stack Application
 
 ## 📌 Overview
 
-Delish is a **containerized restaurant web application** designed to demonstrate **real-world DevOps practices**.
+Delish is a full-stack restaurant application enhanced with a complete **DevSecOps pipeline**.
 
-The project starts as a frontend application and evolves into a **multi-service system** including backend APIs, database integration, CI/CD pipelines, and Kubernetes deployment.
-
----
-
-## 🎯 Project Objective
-
-This project is built to showcase:
-
-- Containerization using Docker
-- Multi-service architecture using Docker Compose
-- CI/CD automation (upcoming)
-- Kubernetes-based deployment (upcoming)
-
-> This is not just a UI project — it is a **DevOps-focused system design project**.
+The goal of this project was to transform a basic application into a **production-like system** by implementing containerization, secure architecture, CI/CD automation, and cloud deployment.
 
 ---
 
-## 🏗️ Current Architecture
+## 🧱 Architecture
 
-Frontend (Static Website)
-⬇
-Nginx Web Server (Docker Container)
-
----
-
-## 🧰 Tech Stack
-
-- Frontend: HTML, CSS, JavaScript
-- Web Server: Nginx
-- Containerization: Docker
-- Orchestration (Local): Docker Compose
-
----
-
-## 🐳 Containerization Details
-
-The application is containerized using Docker to ensure:
-
-- Environment consistency
-- Portability across systems
-- Simplified deployment
+```
+User → HTTPS → Nginx (Reverse Proxy) → Frontend → Backend → PostgreSQL
+```
 
 ### Key Points:
 
-- Uses lightweight **nginx:alpine** image
-- Static files served via Nginx
-- Custom Dockerfile for build
+* Nginx acts as a **single entry point**
+* Routes:
+
+  * `/` → Frontend
+  * `/api` → Backend
+* All services communicate via **Docker network (`delish-net`)**
+* Deployed on **AWS EC2**
 
 ---
 
-## ⚙️ Docker Compose Setup
+## 🛠️ Tech Stack
 
-Docker Compose is used to manage the application lifecycle.
+### Frontend
 
-It handles:
+* HTML, CSS, JavaScript
 
-- Container orchestration
-- Port mapping
-- Restart policies
-- Health checks
+### Backend
 
-Run the entire application with a single command.
+* Node.js, Express.js
 
----
+### Database
 
-## 🚀 How to Run Locally
+* PostgreSQL
 
-### 1. Clone the repository
+### DevOps & Infrastructure
 
-```
-git clone https://github.com/Pragya-Malik/Delish-Project.git
-cd Delish-Project
-```
+* Docker
+* Docker Networking
+* Nginx (Reverse Proxy)
 
-### 2. Start the application
+### CI/CD & DevSecOps
 
-```
-docker compose up --build
-```
+* GitHub Actions
+* Trivy (Image Scanning)
 
-### 3. Access the app
+### Cloud
 
-```
-http://localhost:8080
-```
+* AWS EC2
 
 ---
 
-## 📁 Project Structure
+## 🐳 Containerization
 
-```
-Delish-Project/
-│── frontend/
-│   ├── index.html
-│   ├── style.css
-│   └── main.js
-│
-│── Dockerfile
-│── docker-compose.yml
-│── README.md
-```
+* Multi-container architecture:
+
+  * Frontend
+  * Backend
+  * Database
+* Custom Docker network (`delish-net`)
+* Internal communication via container DNS
+* Backend & DB are **not exposed publicly**
 
 ---
 
-## 🔄 Upcoming Enhancements (Roadmap)
+## 🌐 Reverse Proxy & HTTPS
 
-This project is actively being expanded into a full DevOps pipeline:
+* Nginx configured as reverse proxy
+* HTTPS implemented using SSL certificates
+* HTTP → HTTPS redirection enabled
+* Only Nginx exposes ports:
 
-- [ ] Backend API (Node.js + Express)
-- [ ] Database integration (PostgreSQL)
-- [ ] Multi-container architecture
-- [ ] CI/CD pipeline using GitHub Actions
-- [ ] Docker image push to registry
-- [ ] Kubernetes deployment (Minikube / K8s cluster)
-- [ ] ConfigMaps & Secrets management
+  * 80 (HTTP)
+  * 443 (HTTPS)
 
 ---
 
-## 📊 Future Architecture (Target)
+## ⚙️ CI/CD Pipeline (DevSecOps)
 
-User → Frontend → Backend API → Database
-        ⬇
-      Docker Containers
-        ⬇
-      CI/CD Pipeline
-        ⬇
-     Kubernetes Cluster
+Automated pipeline using GitHub Actions:
 
----
-
-## 💡 Key Learning Outcomes
-
-- Understanding container-based deployments
-- Managing multi-service applications
-- Building CI/CD pipelines
-- Deploying applications on Kubernetes
+1. 🔍 Code Quality Check
+2. 🔐 Secret Scanning
+3. 📦 Dependency Scanning
+4. 🐳 Dockerfile Linting
+5. 🏗️ Build & Push Docker Images
+6. 🛡️ Image Scanning using Trivy
+7. 🚀 Deployment to AWS EC2 via SSH
 
 ---
 
-## 📌 Important Note
+## ☁️ Deployment
 
-This project is intentionally designed to grow from a simple frontend application into a **production-style DevOps project**.
+* Hosted on AWS EC2 instance
+* Containers managed using Docker
+* Reverse proxy (Nginx) handles all incoming traffic
+* Backend and database run internally within the Docker network
 
 ---
 
-## 👩‍💻 Author
+## 🧠 Key Challenges & Solutions
 
-Pragya Malik
+* Fixed container communication using Docker networking
+* Resolved **502 Bad Gateway** errors (backend connectivity)
+* Corrected backend binding (`localhost → 0.0.0.0`)
+* Solved static asset loading issues (Docker COPY + paths)
+* Fixed port conflicts in the deployment pipeline
+* Debugged database schema issues
+* Implemented HTTPS using SSL certificates
+
+---
+
+## 🔐 DevSecOps Practices Implemented
+
+* Secret scanning to detect exposed credentials
+* Dependency vulnerability scanning
+* Dockerfile linting for best practices
+* Container image scanning using Trivy
+
+---
+
+## 📸 Screenshots
+
+### 🖥️ Application UI
+
+![App](./screenshots/application-UI.png)
+
+### ⚙️ CI/CD Pipeline
+
+![Pipeline](./screenshots/pipeline.png)
+
+### 🐳 Running Containers
+
+![Docker](./screenshots/docker.png)
+
+### 🧱 Architecture Diagram
+
+![Architecture](./screenshots/architecture.png)
+
+### 🔐 HTTPS Enabled
+
+![HTTPS](./screenshots/https.png)
+
+---
+
+## ⚠️ Limitations
+
+* Uses self-signed SSL (browser shows "Not Secure")
+* Database initialization is manual
+* No orchestration (Docker only)
+* Single-instance deployment
+
+---
+
+## 🚀 Future Improvements
+
+* Integrate Let’s Encrypt for trusted SSL
+* Automate database initialization
+* Add monitoring & logging
+* Implement Kubernetes for orchestration
+
+---
+
+## 🎯 Project Highlights
+
+* End-to-end DevSecOps pipeline
+* Real-world debugging and troubleshooting
+* Secure architecture with reverse proxy
+* Automated cloud deployment
+
+---
+
+## 👤 Author
+
+**Pragya Malik**
+
+---
+
+## ⭐ Support
+
+If you found this project helpful, consider giving it a ⭐ on GitHub!
