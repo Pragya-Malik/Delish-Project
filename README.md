@@ -126,30 +126,6 @@ Automated pipeline using GitHub Actions:
 
 ---
 
-## 📸 Screenshots
-
-### 🖥️ Application UI
-
-![App](./screenshots/application-UI.png)
-
-### ⚙️ CI/CD Pipeline
-
-![Pipeline](./screenshots/pipeline.png)
-
-### 🐳 Running Containers
-
-![Docker](./screenshots/docker.png)
-
-### 🧱 Architecture Diagram
-
-![Architecture](./screenshots/architecture.png)
-
-### 🔐 HTTPS Enabled
-
-![HTTPS](./screenshots/https.png)
-
----
-
 ## ⚠️ Limitations
 
 * Uses self-signed SSL (browser shows "Not Secure")
