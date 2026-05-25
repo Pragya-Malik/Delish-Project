@@ -2,6 +2,7 @@ name: Code Quality
 
 on:
   workflow_call:
+  workflow_dispatch:
 
 jobs:
   code-quality:
@@ -19,8 +20,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-
-      # Backend
+          
+       # Backend
       - name: Install Backend Dependencies
         working-directory: backend
         run: npm ci
@@ -33,7 +34,7 @@ jobs:
         working-directory: backend
         run: npm audit --audit-level=high
 
-      # Frontend
+       # Frontend
       - name: Install Frontend Dependencies
         working-directory: frontend
         run: npm ci
@@ -42,3 +43,6 @@ jobs:
         working-directory: frontend
         run: npx eslint .
 
+      - name: Run Frontend Security Audit
+        working-directory: frontend
+        run: npm audit --audit-level=high
