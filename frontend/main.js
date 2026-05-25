@@ -24,7 +24,7 @@ async function loadMenu() {
       container.appendChild(div);
     });
 
-  } catch (err) {
+  } catch (_err) {
     console.warn("Backend not connected yet");
   }
 }
