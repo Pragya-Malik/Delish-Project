@@ -1,8 +1,10 @@
+
+
 # 🍽️ Delish — DevSecOps Pipeline with Dockerized Full-Stack Application
 
 ## 📌 Overview
 
-Delish is a full-stack restaurant application enhanced with a complete **DevSecOps pipeline**.
+Delish is a fullstack restaurant application enhanced with a complete **DevSecOps pipeline**.
 
 The goal of this project was to transform a basic application into a **production-like system** by implementing containerization, secure architecture, CI/CD automation, and cloud deployment.
 
