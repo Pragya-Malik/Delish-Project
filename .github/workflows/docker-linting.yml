@@ -2,17 +2,18 @@ name: Docker Lint
 
 on:
   workflow_call:
+  workflow_dispatch:
 
 jobs:
-  Docker-linting:
+  docker-linting:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Lint frontend Dockerfile
+      - name: Lint Frontend Dockerfile
         run: docker run --rm -i hadolint/hadolint < frontend/Dockerfile
 
-      - name: Lint backend Dockerfile
+      - name: Lint Backend Dockerfile
         run: docker run --rm -i hadolint/hadolint < backend/Dockerfile
