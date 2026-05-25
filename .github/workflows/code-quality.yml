@@ -4,27 +4,41 @@ on:
   workflow_call:
 
 jobs:
-  Code-quality:
+  code-quality:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18]
+
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: ${{ matrix.node-version }}
 
-      - name: Install backend deps
-        run: |
-          cd backend
-          npm install
+      # Backend
+      - name: Install Backend Dependencies
+        working-directory: backend
+        run: npm ci
 
-      - name: Run ESLint (backend)
-        run: |
-          cd backend
-          npx eslint . || true
+      - name: Run Backend ESLint
+        working-directory: backend
+        run: npx eslint .
 
-      - name: Check frontend JS (basic)
-        run: |
-          echo "Frontend JS checked (no linter configured)"
+      - name: Run Backend Security Audit
+        working-directory: backend
+        run: npm audit --audit-level=high
+
+      # Frontend
+      - name: Install Frontend Dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name: Run Frontend ESLint
+        working-directory: frontend
+        run: npx eslint .
+
